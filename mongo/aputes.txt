@@ -1,0 +1,8 @@
+modificar el dockerfile de la pagina de docker para qeu funcione en nnuestro so, no usar comando sudo dentro del dockerfile.
+mongoimport -d mydb -c things --type csv --file SLATotal.csv --headerline -h localhost:27017
+mongoimport -d node-mongo-recipe -c recipes --type json --file prueba.json -h localhost:27017
+mongoimport -d node-mongo-recipe -c recipes --type json --file prueba.json --jsonArray
+mongoimport -d node-mongo-recipe -c total --type json --file Total.json --jsonArray
+
+mongoimport -d node-mongo-recipe -c pts --type json --file pts.json --jsonArray
+
