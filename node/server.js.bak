@@ -1,0 +1,44 @@
+'use strict';// no se pa que sirve
+
+//var SU = require('/consultamongo');// se supone que llama a un archivo en el cual estan unas funciones. 
+const express = require('express');//no entindp que queires decir con sigue
+//const mongoose = require('mongoose'); //js==javascript express se supone que es javascript pero creo qeu no tienen nada que ver ya que..tiene su propia sintaxis
+
+//module.exports = mongoose;
+
+// Constants
+const PORT = 8080;//puerto en el que escucha la app
+
+// App
+const app = express();
+//module.exports = function(app){// esto no aparece
+app.get('/', function (req, res) {	
+		res.sendfile('pagina.html');  
+});
+app.get('/tablas', function(req, res){
+	res.sendfile('tablas.html');
+});
+app.get('/contact', function(req, res){
+	res.sendfile('contacto.html');
+});
+app.get('/ico', function(req, res){
+	res.sendfile('icono.ico');
+});
+app.get('/index', function(req, res){
+	res.sendfile('index.js');
+});
+/*app.get('/', function (req, res) {
+	SU.list(function(e, ale){
+		res.render('server', {title: 'SLA',error:'',consultamongo: ale});
+	});
+app.post('/', function(req, res){
+	SU.new({alegado: req.param('alegado')},function(o){//esto es otra funcion definida en el archivo consultamongo.js
+		SU.list(function(e, ale){
+			res.render('server', {title: 'SLA',error:o,consultamongo: ale});
+	});
+	});
+});
+};*///supongamos que si lleva esto ; A ver si asi va, es qeyu lo malo es que no hay log. en le cual vea donde esta el fallos
+//mongoose.connect('mongodb://localhost/mydb');
+app.listen(PORT);
+console.log('Running on http://localhost:' + PORT);

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MY APP</title>
+</head>
+<body>
+  May Node and Express be with you.
+
+  <ul class="things">
+  <% script('server.js') -%>
+  <% for(var i=0; i<SLO.length; i++) {%>
+    <li class="quote">
+      <span><%= SLO[i].Ticket %></span>
+      <span><%= SLO[i].SLO %></span>
+    </li>
+  <%}%>
+  </ul>
+
+  <form action="/things" method="POST">
+    <input type="text" placeholder="Ticket" name="Ticket">
+    <input type="text" placeholder="SLO" name="SLO">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

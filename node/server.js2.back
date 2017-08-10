@@ -1,0 +1,77 @@
+//'use strict';// no se pa que sirve
+
+//var SU = require('/consultamongo');// se supone que llama a un archivo en el cual estan unas funciones. 
+const express = require('express');//no entindp que queires decir con sigue
+//const mongoose = require('mongoose'); //js==javascript express se supone que es javascript pero creo qeu no tienen nada que ver ya que..tiene su propia sintaxis
+const bodyParser= require('body-parser')
+const engine = require('ejs-mate')
+//module.exports = mongoose;
+const app = express();
+//const test = require('assert');
+var MongoClient = require('mongodb').MongoClient
+app.use(bodyParser.urlencoded({extended: true}))
+
+app.set('views',__dirname + '/views');
+app.set('view engine', 'ejs')
+var db;
+
+/***************************************************/
+
+MongoClient.connect ( 'mongodb://localhost:27017/mydb', function(err, database)  {
+  if (err) return console.log(err)
+  db = database
+  app.listen(27017, function() {
+    console.log('listening on 27017')
+  })
+})
+app.get('/', function (req, res) {	
+		res.sendfile('pagina.html');
+});
+app.get('/', function(req, res)  {
+  db.collection('things').find().toArray(function(err, result)  {
+    if (err) return console.log(err)
+    // renders index.ejs
+    res.render('index.ejs', {things: result})
+  })
+})
+
+app.get('/', function(req, res) {
+  var cursor = db.collection('things').find()
+  db.collection('things').find().toArray(function(err, results) {
+  console.log(results)
+
+})
+})
+app.get('/tablas', function(req, res){
+	res.sendfile('tablas.html');
+});
+app.get('/contact', function(req, res){
+	res.sendfile('contacto.html');
+});
+app.get('/ico', function(req, res){
+	res.sendfile('icono.ico');
+});
+	/*MongoClient.connect(url, function(err, db) {
+  	var col = db.collection('things');
+ 	 col.find().toArray(function(err, items) {
+ 	  if (err) {
+  	    console.log(' Error:', err);
+ 	   } else {
+  	    console.log(items);
+ 	   }
+	    db.close();  
+ 	 });
+ 	 });*/
+/*******************************************************/
+
+app.post('/things', function(req, res)  {
+  db.collection('things').save(req.body, function(err, result){
+    if (err) return console.log(err)
+
+    console.log('saved to database')
+    res.redirect('/')
+  })
+})
+
+app.listen(8080);
+console.log('Running on http://localhost: 8080');
